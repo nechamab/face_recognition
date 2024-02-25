@@ -16,6 +16,8 @@ How well did your final model perform, compared to the baseline?
 
 The baseline model for this project is a custom Siamese network utilizing the contrastive loss function to measure loss. It achieved 99% training accuracy on the Olivetti dataset and 91% accuracy on the validation.
 
+![model_acc_loss](./images/model_acc_loss.png)
+
 # Conclusion
 How would you recommend that your model be used?
 
@@ -24,9 +26,3 @@ An explanation of the repository organization
 Links to the final notebook and presentation
 As a reminder, the Markdown notation for a link is [link text](/path/to/file)
 Reproduction instructions (or a link to them)
-
-3. Elevator Pitch: 
-4. Business Understanding and Data Understanding: 
-5. Modeling and Evaluation
-6. Conclusion
-7. Repository Navigation
