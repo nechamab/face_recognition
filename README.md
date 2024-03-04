@@ -35,7 +35,7 @@ This is the structure of this repo:
 
 Final Notebook: [final_notebook]()
 
-Presentation: [presentation]()
+Presentation: [presentation](https://github.com/nechamab/face_recognition/blob/main/presentation.pdf)
 
 ## Reproduction instructions
 
