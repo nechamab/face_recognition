@@ -11,7 +11,7 @@ import time
 
 
 # page title 
-st.title('Face Recognition App')
+st.title('Facial Recognition App')
 
 #import loss function for custom objects
 def loss(margin=1):
@@ -52,7 +52,7 @@ def loadmodel(file):
     return model
 
 # instantiate model
-model = loadmodel('./saved_models/siamese_model_last.h5')
+model = loadmodel('../models/the_right_one.h5')
 
 # st.sidebar.title('Menu')
 
@@ -89,7 +89,11 @@ def verify_image(model, detection_threshold, verification_threshold):
     results = []
     names = []
 
-    verification_images_folder = './application_data/verification_images'
+    verification_images_folder = '../web_app/application_data/verification_images'
+
+    # Preprocess the input image
+    input_img = preprocess_image('../web_app/application_data/input_image/captured_image.jpg')
+
     for folder in os.listdir(verification_images_folder):
         folder_path = os.path.join(verification_images_folder, folder)
         if not os.path.isdir(folder_path):  # Skip if it's not a directory
@@ -98,7 +102,6 @@ def verify_image(model, detection_threshold, verification_threshold):
             if image_file.startswith('.'):  # Skip hidden files
                 continue
             image_path = os.path.join(folder_path, image_file)
-            input_img = preprocess_image('./application_data/input_image/captured_image.jpg')
             validation_img = preprocess_image(image_path)
 
             # Check if input_img and validation_img have the same shape
@@ -124,148 +127,92 @@ def verify_image(model, detection_threshold, verification_threshold):
     return results, verified, name_with_min_score
 
 
-# open webcam
-
-# def main():
-#     st.caption("Powered by OpenCV, Streamlit")
-#     open_camera = st.button("Open Camera")
-
-#     if open_camera:
-#         cascPath = './haarcascade_frontalface_default.xml'
-#         faceCascade = cv2.CascadeClassifier(cascPath)
-
-#         cap = cv2.VideoCapture(0)
-
-#         ret, frame = cap.read()
-#         if ret:
-#             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-#             st.image(frame, channels="RGB")
-
-#             image_folder = "./application_data/input_image"
-#             if not os.path.exists(image_folder):
-#                 os.makedirs(image_folder)
-#             image_path = os.path.join(image_folder, "captured_image.jpg")
-#             cv2.imwrite(image_path, frame)
-#             st.write("Image captured and saved!")
-
-#             # input_image = preprocess_image(image_path)
-#             if image_path is not None:
-#                 # Perform verification on the input image
-#                 results, verified, min_score_name = verify_image(model, 0.9, 0.4)
-#                 st.write(f"Verified: {verified}")
-#                 st.write(f"Welcome {min_score_name}")
-
-#         cap.release()
-
-# if __name__ == "__main__":
-#     main()
-
-# def main():
-#     st.caption("Powered by OpenCV, Streamlit")
-#     open_camera = st.button("Open Camera")
-
-#     if open_camera:
-#         cascPath = './haarcascade_frontalface_default.xml'
-#         faceCascade = cv2.CascadeClassifier(cascPath)
-
-#         video_capture = cv2.VideoCapture(0)
-
-#         while True:
-#             ret, frame = video_capture.read()
-
-#             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-#             faces = faceCascade.detectMultiScale(
-#                 gray,
-#                 scaleFactor=1.1,
-#                 minNeighbors=5,
-#                 minSize=(30, 30),
-#                 flags=cv2.CASCADE_SCALE_IMAGE
-#             )
-
-#             # Crop and display the face region
-#             for (x, y, w, h) in faces:
-#                 face_frame = frame[y:y+h, x:x+w]
-#                 face_frame = cv2.cvtColor(face_frame, cv2.COLOR_BGR2RGB)
-#                 st.image(face_frame, channels="RGB")
-
-#                 image_folder = "./application_data/input_image"
-#                 if not os.path.exists(image_folder):
-#                     os.makedirs(image_folder)
-#                 image_path = os.path.join(image_folder, "captured_image.jpg")
-#                 cv2.imwrite(image_path, frame)
-#                 st.write("Image captured and saved!")
-
-#                 # Perform verification on the face region
-#                 if image_path is not None:
-#                     # Perform verification on the input image
-#                     results, verified, min_score_name = verify_image(model, 0.6, 0.4)
-#                     st.write(f"Verified: {verified}")
-#                     st.write(f"Welcome {min_score_name}")
-
-#             cv2.imshow('Video', frame)
-
-#             if cv2.waitKey(1) & 0xFF == ord('q'):
-#                 break
-
-#         video_capture.release()
-#         cv2.destroyAllWindows()
-
-# if __name__ == "__main__":
-#     main()
-
 def main():
     st.caption("Powered by OpenCV, Streamlit")
-    open_camera = st.button("Open Camera")
+    
+    # Option to open camera or upload an image
+    option = st.radio("Choose an option:", ["Open Camera", "Upload Image"])
 
-    if open_camera:
-        cascPath = './haarcascade_frontalface_default.xml'
-        faceCascade = cv2.CascadeClassifier(cascPath)
+    if option == "Open Camera":
+        open_camera = st.button("Open Camera")
+        verification_done = False
 
-        video_capture = cv2.VideoCapture(0)
+        if open_camera and not verification_done:
+            cascPath = '../data/haarcascade_frontalface_default.xml'
+            faceCascade = cv2.CascadeClassifier(cascPath)
 
-        while True:
-            ret, frame = video_capture.read()
+            video_capture = cv2.VideoCapture(0)
 
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            st.image(frame, channels="RGB")
+            while True:
+                ret, frame = video_capture.read()
 
-            gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+                frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                st.image(frame, channels="RGB")
 
-            faces = faceCascade.detectMultiScale(
-                gray,
-                scaleFactor=1.1,
-                minNeighbors=5,
-                minSize=(30, 30),
-                flags=cv2.CASCADE_SCALE_IMAGE
-            )
+                gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
 
-            # Crop and display the face region
-            for (x, y, w, h) in faces:
-                face_frame = frame[y:y+h, x:x+w]
-                face_frame = cv2.cvtColor(face_frame, cv2.COLOR_RGB2BGR)
-                st.image(face_frame, channels="BGR")
+                faces = faceCascade.detectMultiScale(
+                    gray,
+                    scaleFactor=1.1,
+                    minNeighbors=5,
+                    minSize=(30, 30),
+                    flags=cv2.CASCADE_SCALE_IMAGE
+                )
 
-                # Perform verification on the face region
-                image_folder = "./application_data/input_image"
-                if not os.path.exists(image_folder):
-                    os.makedirs(image_folder)
-                image_path = os.path.join(image_folder, "captured_image.jpg")
-                cv2.imwrite(image_path, face_frame)
-                st.write("Image captured and saved!")
+                # Crop and display the face region
+                for (x, y, w, h) in faces:
+                    face_frame = frame[y:y+h, x:x+w]
+                    face_frame = cv2.cvtColor(face_frame, cv2.COLOR_RGB2BGR)
+                    st.image(face_frame, channels="BGR")
 
-                # input_image = preprocess_image(image_path)
-                if image_path is not None:
-                    # Perform verification on the input image
-                    results, verified, min_score_name = verify_image(model, 0.7, 0.4)
-                    st.write(f"Verified: {verified}")
-                    st.write(f"Welcome {min_score_name}")
+                    # Perform verification on the face region
+                    image_folder = "../web_app/application_data/input_image"
+                    if not os.path.exists(image_folder):
+                        os.makedirs(image_folder)
+                    image_path = os.path.join(image_folder, "captured_image.jpg")
+                    cv2.imwrite(image_path, face_frame)
+                    st.write("Image captured and saved.")
 
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+                    # input_image = preprocess_image(image_path)
+                    if image_path is not None:
+                        # Perform verification on the input image
+                        results, verified, min_score_name = verify_image(model, 0.03, 0.03)
+                        if verified:
+                            st.write(f"You are Verified!")
+                            st.write(f"Welcome {min_score_name}")
+                        else:
+                            st.write(f"Unknown User")
+                        verification_done = True  # Set the flag to indicate verification is done
+                        break  # Exit the loop after verification is done
 
-        video_capture.release()
-        cv2.destroyAllWindows()
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+
+            video_capture.release()
+            cv2.destroyAllWindows()
+    else:
+        uploaded_file = st.file_uploader("Choose an image file", type=["jpg", "jpeg", "png"])
+
+        if uploaded_file is not None:
+            image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), cv2.IMREAD_COLOR)
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+            st.image(image, channels="RGB")
+
+            # Perform verification on the input image
+            image_path = "../web_app/application_data/input_image/uploaded_image.jpg"
+            cv2.imwrite(image_path, cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
+            st.write("Image uploaded and saved.")
+
+            # input_image = preprocess_image(image_path)
+            if image_path is not None:
+                # Perform verification on the input image
+                results, verified, min_score_name = verify_image(model, 0.03, 0.03)
+                if verified:
+                    st.write(f"You are Verified!")
+                    # st.write(f"Welcome {min_score_name}")
+                else:
+                    st.write(f"Unknown User")
 
 if __name__ == "__main__":
     main()
