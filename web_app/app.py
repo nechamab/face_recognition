@@ -4,66 +4,6 @@ import numpy as np
 import joblib
 import seaborn as sns
 
-# st.title('Practice app')
-# st.header('gonna make an app good')
-
-# # put contact info in here
-# st.sidebar.title('sidebar title')
-# sidebar = st.sidebar 
-
-# # button
-# side_button = st.sidebar.button('Press me')
-# if side_button:
-#     sidebar.write('button is pressed')
-# else:
-#     sidebar.write('Not pressed yet')
-
-# # columns 
-
-# col1, col2 = st.columns(2)
-# col1.subheader('Col1')
-# col2.subheader('Col2')
-
-# col21, col22, col23 = st.columns([3, 2, 1])
-# col21.write('this is the widest column and the text should wrap appropriately')
-# col22.write('second to widest, kinda mid, basic, testing if thats true tbh')
-# col23.write('this is smallest check ok cool')
-
-# st.markdown('**yoooo**')
-
-# '## markdown in reg space'
-
-# # st.write('<h2 style='text-align:center'')
-
-# check = st.checkbox('check this out')
-# button_check = st.button('is box chekced')
-# if button_check:
-#     if check:
-#         st.write('box is checked')
-#     else:
-#         st.write('box is not checked')
-
-# input_options = ['Upload an image', 'Use Camera']
-# option = st.radio('Choose an option', input_options)
-# submit_button = st.button('submit')
-# if submit_button:
-#     st.write(f'you chose {option} cool')
-
-
-# select_box = st.selectbox('Choose an option', input_options)
-# submit_button = st.button('submit2')
-# if submit_button:
-#     st.write(f'you chose {select_box} cool')
-
-# num_stuff = st.slider('how many things do you have', 0, 10, step=1)
-
-# in_text = st.text_input('what is your fav animal', value = 'i dont know')
-
-# # penguins = sns.load_dataset('penguins')
-
-# # data_expander = st.expander('Show penguins dataset')
-# # data_expander.table(penguins.head())
-
 import cv2
 import streamlit as st
 import cv2
