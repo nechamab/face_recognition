@@ -10,12 +10,21 @@ The project addresses the growing demand for robust and accurate facial recognit
 
 ## Data Collection and Understanding
 
-To train the custom Siamese neural network, I used a dataset comprising of the faces of my classmates. I used my phone camera to collect the images and placed them into folders named for the person. It was then easy to implement the images into my project. The dataset is diverse, covering different facial expressions, lighting conditions, and angles to ensure the model's robustness. To prepare the dataset for training, a comprehensive data preprocessing pipeline was employed. 
+To train the custom Siamese neural network, I used a dataset comprising of the faces of my classmates. I used my phone camera to collect the images and placed them into folders named for the person. The dataset is diverse, covering different facial expressions, lighting conditions, and angles to ensure the model's robustness. 
 
+## Data Preprocessing
 
-## Modeling and Evaluation
+To prepare the dataset for training, a comprehensive data preprocessing pipeline was employed. Then created image pairs for training.
 
-The baseline model for this project is a custom Siamese network utilizing the contrastive loss function to measure loss. It achieved 86% accuracy. The loss is approaching 0.
+## Modeling
+
+![model_architecture](./images/Siamese-Network-Architecture.png)
+
+Here is the architecture of the network, as the images go through the network it extracts features to create embedded feature vectors. From these vectors we find the distance between them and that represents their similarity. The closer it is in distance, the more similar it is. 
+
+## Evaluation
+
+The model achieved 86% accuracy in predicting similar and dissimilar images correctly. The loss is approaching 0.
 
 ![model_loss](./images/loss.png)
 
@@ -30,6 +39,8 @@ In conclusion, this project marks a significant advancement in facial recognitio
 ## Repository Navigation
 
 This is the structure of this repo:
+
+![repo_navigation](./images/repo_navigation.png)
 
 ## Links to the final notebook and presentation
 
