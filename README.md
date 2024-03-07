@@ -10,17 +10,18 @@ The project addresses the growing demand for robust and accurate facial recognit
 
 ## Data Collection and Understanding
 
-To train the custom Siamese neural network, I used a dataset comprising of the faces of my classmates. I used my phone camera to collect the images and placed them into folders named for the person. It was then easy to implement the images into my project. The dataset is diverse, covering different facial expressions, lighting conditions, and angles to ensure the model's robustness.
+To train the custom Siamese neural network, I used a dataset comprising of the faces of my classmates. I used my phone camera to collect the images and placed them into folders named for the person. It was then easy to implement the images into my project. The dataset is diverse, covering different facial expressions, lighting conditions, and angles to ensure the model's robustness. To prepare the dataset for training, a comprehensive data preprocessing pipeline was employed. 
+
 
 ## Modeling and Evaluation
 
-The baseline model for this project is a custom Siamese network utilizing the contrastive loss function to measure loss. It achieved 86% accuracy. The loss is approaching 0 and the other metrics such as Precision, Recall and F1 Score all scored 100%.
+The baseline model for this project is a custom Siamese network utilizing the contrastive loss function to measure loss. It achieved 86% accuracy. The loss is approaching 0.
 
 ![model_loss](./images/loss.png)
 
 ## Deployment
 
-To deploy my project I created a web app with Streamlit. The code for it is in the directory `web_app`
+To deploy my project I created a web app with Streamlit. The code for it is in the directory `web_app`. It has an option to upload an image or open camera to be verified.
 
 ## Conclusion
 
@@ -32,7 +33,7 @@ This is the structure of this repo:
 
 ## Links to the final notebook and presentation
 
-Final Notebook: [final_notebook]()
+Final Notebook: [final_notebook](https://github.com/nechamab/face_recognition/blob/main/notebooks/face_recognition.ipynb)
 
 Presentation: [presentation](https://github.com/nechamab/face_recognition/blob/main/presentation.pdf)
 
