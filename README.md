@@ -14,10 +14,9 @@ To train the custom Siamese neural network, I used a dataset comprising of the f
 
 ## Modeling and Evaluation
 
-The baseline model for this project is a custom Siamese network utilizing the contrastive loss function to measure loss. It achieved 100% training accuracy and 100% test accuracy. The loss is approaching 0 and the other metrics such as Precision, Recall and F1 Score all scored 100%.
+The baseline model for this project is a custom Siamese network utilizing the contrastive loss function to measure loss. It achieved 86% accuracy. The loss is approaching 0 and the other metrics such as Precision, Recall and F1 Score all scored 100%.
 
 ![model_loss](./images/loss.png)
-![model_accuracy](./images/accuracy.png)
 
 ## Deployment
 

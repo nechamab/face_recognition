@@ -52,7 +52,7 @@ def loadmodel(file):
     return model
 
 # instantiate model
-model = loadmodel('../models/the_right_one.h5')
+model = loadmodel('../models/model.h5')
 
 # st.sidebar.title('Menu')
 
@@ -121,10 +121,13 @@ def verify_image(model, detection_threshold, verification_threshold):
     verification = detection / len(results)
     verified = verification > verification_threshold
 
-    min_score_index = np.argmin(results)
-    name_with_min_score = names[min_score_index]
+    max_score_index = np.argmax(results)
+    name_with_max_score = names[max_score_index]
 
-    return results, verified, name_with_min_score
+    # min_score_index = np.argmin(results)
+    # name_with_min_score = names[min_score_index]
+
+    return results, verified, name_with_max_score
 
 
 def main():
@@ -207,10 +210,10 @@ def main():
             # input_image = preprocess_image(image_path)
             if image_path is not None:
                 # Perform verification on the input image
-                results, verified, min_score_name = verify_image(model, 0.03, 0.03)
+                results, verified, min_score_name = verify_image(model, 0.134, 0.18175)
                 if verified:
-                    st.write(f"You are Verified!")
-                    # st.write(f"Welcome {min_score_name}")
+                    st.write(f"You are verified!")
+                    st.write(f"Welcome {min_score_name}")
                 else:
                     st.write(f"Unknown User")
 
